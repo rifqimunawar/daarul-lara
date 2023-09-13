@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->string('img')->nullable();
             $table->unsignedBigInteger('category_cource_id'); // Ubah nama kolom dan tambahkan "unsigned" untuk foreign key
             $table->timestamps();

@@ -22,26 +22,32 @@ class DatabaseSeeder extends Seeder
 
         DB::table('category_cources')->insert([
           'name'=> 'SD',
+          'img'=>'cat-1.jpg',
         ]);
         DB::table('category_cources')->insert([
           'name'=> 'SMP',
+          'img'=>'cat-2.jpg',
         ]);
         DB::table('category_cources')->insert([
           'name'=> 'SMA',
+          'img'=>'cat-3.jpg',
         ]);
 
 
         // ===========================================
         DB::table('cources')->insert([
           'name'=> 'calistung',
+          'img'=> 'course-1.jpg',
           'category_cource_id'=>'1'
         ]);
         DB::table('cources')->insert([
           'name'=> 'membaca',
+          'img'=> 'course-2.jpg',
           'category_cource_id'=>'1'
         ]);
         DB::table('cources')->insert([
           'name'=> 'geografi',
+          'img'=> 'course-3.jpg',
           'category_cource_id'=>'3'
         ]);
 

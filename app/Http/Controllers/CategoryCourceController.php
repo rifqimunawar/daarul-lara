@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryCource;
 use Illuminate\Http\Request;
+use App\Models\CategoryCource;
+use Intervention\Image\Facades\Image;
 
 class CategoryCourceController extends Controller
 {
@@ -33,15 +34,30 @@ class CategoryCourceController extends Controller
         // Validasi data yang diterima dari request jika diperlukan
         $validatedData = $request->validate([
             'name' => 'required', // Ganti 'nama_field' dengan nama field yang sesuai
+            'description' => 'required', // Ganti 'nama_field' dengan nama field yang sesuai
             // Tambahkan validasi lain jika diperlukan
+            'img' => 'required|image|mimes:jpeg,png,jpg',
         ]);
     
         // Buat instance dari model CategoryCource
         $category = new CategoryCource();
         
         // Isi model CategoryCource dengan data dari request
-        $category->name = $request->input('name'); // Ganti 'nama_field' dengan nama field yang sesuai sesuai dengan nama kolom di tabel database
+        $category->name = $request->input('name');
+        $category->description = $request->input('description'); 
         
+        if ($request->hasFile('img')) {
+          $image = $request->file('img');
+          $newFileName = 'category' . '_' . $request->name . '_' . now()->timestamp . '.' . $image->getClientOriginalExtension();
+
+          // Simpan gambar yang diunggah ke direktori penyimpanan sambil mengkompresi ulang
+          $compressedImage = Image::make($image)->resize(700, null, function ($constraint) {
+            $constraint->aspectRatio();
+            })->save(public_path('img/' . $newFileName));
+
+          $category->img =  $newFileName;
+        }
+        dd($category);
         // Simpan data ke dalam database
         $category->save();
     
