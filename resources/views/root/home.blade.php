@@ -156,45 +156,27 @@
             <div class="row g-3">
                 <div class="col-lg-7 col-md-6">
                     <div class="row g-3">
+                      @foreach ($category_by_latest->take(2) as $item)
                         <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{ asset('root_template/img/cat-1.jpg') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('img/'. $item->img) }}" alt="">
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                                     style="margin: 1px;">
-                                    <h5 class="m-0">Web Design</h5>
-                                    <small class="text-primary">49 Courses</small>
+                                    <h5 class="m-0">{{ $item->name }}</h5>
+                                    <small class="text-primary">{{ $item->name }}</small>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                            <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{ asset('root_template/img/cat-2.jpg') }}" alt="">
-                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-                                    style="margin: 1px;">
-                                    <h5 class="m-0">Graphic Design</h5>
-                                    <small class="text-primary">49 Courses</small>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                            <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{ asset('root_template/img/cat-3.jpg') }}" alt="">
-                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-                                    style="margin: 1px;">
-                                    <h5 class="m-0">Video Editing</h5>
-                                    <small class="text-primary">49 Courses</small>
-                                </div>
-                            </a>
-                        </div>
+                      @endforeach
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
                     <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100" src="{{ asset('root_template/img/cat-4.jpg') }}" alt=""
+                        <img class="img-fluid position-absolute w-100 h-100" src="{{ asset('img/'. $category_by_course->img) }}" alt=""
                             style="object-fit: cover;">
                         <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                             style="margin:  1px;">
-                            <h5 class="m-0">Online Marketing</h5>
+                            <h5 class="m-0">{{ $category_by_course->name }}</h5>
                             <small class="text-primary">49 Courses</small>
                         </div>
                     </a>

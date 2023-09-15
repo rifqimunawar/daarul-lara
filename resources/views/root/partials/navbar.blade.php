@@ -9,20 +9,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto p-4 p-lg-0">
-              <a href="index.html" class="nav-item nav-link active">Home</a>
-              <a href="" class="nav-item nav-link">About</a>
-              <a href="" class="nav-item nav-link">Courses</a>
-              <div class="nav-item dropdown">
+              <a href="/" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
+              <a href="/about" class="nav-item nav-link {{ request()->is('/about') ? 'active' : '' }}">About</a>
+              <a href="/cources" class="nav-item nav-link {{ request()->is('/cources') ? 'active' : '' }}">Courses</a>
+              {{-- <a href="/biaya" class="nav-item nav-link {{ request()->is('/biaya') ? 'active' : '' }}">Pendaftaran</a> --}}
+              {{-- <div class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                   <div class="dropdown-menu fade-down m-0">
                       <a href="" class="dropdown-item">Our Team</a>
                       <a href="" class="dropdown-item">Testimonial</a>
                       <a href="" class="dropdown-item">404 Page</a>
                   </div>
-              </div>
+              </div> --}}
               <a href="" class="nav-item nav-link">Contact</a>
           </div>
-          <a href="" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">Daftar Sekarang</a>
+          <a href="/biaya" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">Daftar Sekarang</a>
       </div>
   </nav>
   <!-- Navbar End -->

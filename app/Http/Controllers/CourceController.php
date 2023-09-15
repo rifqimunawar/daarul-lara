@@ -75,10 +75,12 @@ class CourceController extends Controller
         $validatedData = $request->validate([
             'name' => 'required', 
             'category_cource_id' => 'required', 
+            'status' => 'required', 
         ]);
 
         $cource->name = $request->input('name'); 
         $cource->category_cource_id = $request->input('category_cource_id'); 
+        $cource->status = $request->input('status'); 
         
         $cource->save();
         

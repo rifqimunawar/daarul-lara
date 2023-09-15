@@ -15,8 +15,8 @@ class CategoryCource extends Model
         parent::boot();
 
         static::deleting(function ($category) {
-            if ($category->courses()->count() > 0) {
-                // Jika ada relasi dengan courses, mencegah penghapusan.
+            if ($category->cources()->count() > 0) {
+                // Jika ada relasi dengan cources, mencegah penghapusan.
                 return false;
             }
         });

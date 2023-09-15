@@ -36,6 +36,38 @@
                             @endforeach
                         </select>
                     </label>
+
+                    
+              <div class="mt-4 mb-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Kelas Status
+                </span>
+                <div class="mt-2">
+                  <label
+                    class="inline-flex items-center text-gray-600 dark:text-gray-400"
+                  >
+                    <input
+                      type="radio"
+                      class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      name="status"
+                      value="0"
+                    />
+                    <span class="ml-2">Kelas Penuh</span>
+                  </label>
+                  <label
+                    class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400"
+                  >
+                    <input
+                      type="radio"
+                      class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      name="status"
+                      value="1"
+                    />
+                    <span class="ml-2">Kelas Masih Tersedia</span>
+                  </label>
+                </div>
+              </div>
+
                     @if ($errors->has('name'))
                         <div class="text-orange-500 text-sm mb-4">{{ $errors->first('name') }}</div>
                     @endif

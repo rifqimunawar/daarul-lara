@@ -23,6 +23,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/cources', [HomeController::class, 'cources'])->name('cources');
+Route::get('/daftar', [HomeController::class, 'daftar'])->name('daftar');
+Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');
+
+Route::get('/get-courses-by-category/{category_id}', [HomeController::class, 'getCoursesByCategory']);
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

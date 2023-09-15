@@ -57,7 +57,7 @@ class CategoryCourceController extends Controller
 
           $category->img =  $newFileName;
         }
-        dd($category);
+        // dd($category);
         // Simpan data ke dalam database
         $category->save();
     
@@ -103,7 +103,19 @@ class CategoryCourceController extends Controller
 
         // Isi model CategoryCource dengan data dari request
         $category->name = $request->input('name'); // Ganti 'name' dengan nama field yang sesuai dengan nama kolom di tabel database
+        $category->description = $request->input('description'); 
         
+        if ($request->hasFile('img')) {
+          $image = $request->file('img');
+          $newFileName = 'category' . '_' . $request->name . '_' . now()->timestamp . '.' . $image->getClientOriginalExtension();
+
+          // Simpan gambar yang diunggah ke direktori penyimpanan sambil mengkompresi ulang
+          $compressedImage = Image::make($image)->resize(700, null, function ($constraint) {
+            $constraint->aspectRatio();
+            })->save(public_path('img/' . $newFileName));
+
+          $category->img =  $newFileName;
+        }
         // Simpan data yang diperbarui ke dalam database
         $category->save();
 
