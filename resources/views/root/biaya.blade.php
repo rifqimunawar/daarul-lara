@@ -13,9 +13,9 @@
                     <select class="form-select form-select-lg mb-3" name="cara" id="caraBelajar"
                         aria-label="Large select example">
                         <option selected>---- Pilih Salah Satu ----</option>
-                        <option value="Online">Online</option>
-                        <option value="Offline">Offline</option>
-                        <option value="Hybrid">Hybrid</option>
+                        @foreach ($cara as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -44,9 +44,9 @@
                     <select id="paket" name="paket" class="form-select form-select-lg mb-3"
                         aria-label="Large select example">
                         <option selected>---- Pilih Salah Satu ----</option>
-                        <option value="4">4 Pertemuan/Bulan</option>
-                        <option value="8">8 Pertemuan/Bulan</option>
-                        <option value="10">10 Pertemuan/Bulan</option>
+                        @foreach ($paket as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -55,9 +55,9 @@
                     <select id="durasi" name="durasi" class="form-select form-select-lg mb-3"
                         aria-label="Large select example">
                         <option selected>---- Pilih Salah Satu ----</option>
-                        <option value="60">60 menit / pertemuan</option>
-                        <option value="90">90 menit / pertemuan</option>
-                        <option value="120">120 menit / pertemuan</option>
+                        @foreach ($durasi as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -66,21 +66,25 @@
                     <select id="peserta" name="peserta" class="form-select form-select-lg mb-3"
                         aria-label="Large select example">
                         <option selected>---- Pilih Salah Satu ----</option>
-                        <option value="1">1 orang / private</option>
-                        <option value="2">2 orang / kelompok</option>
-                        <option value="3">3 orang / kelompok</option>
-                        <option value="4">4 orang / kelompok</option>
-                        <option value="5">5 orang / kelompok</option>
-                        <option value="6">6 orang / kelompok</option>
+                        @foreach ($peserta as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-warning px-4">Cek Harga</button>
+                <div class="text-center" id="cekHargaButtonDiv">
+                    <button type="submit" class="btn btn-warning px-4" id="cekHargaButton">Cek Harga</button>
                 </div>
 
+                <div class="text-center" id="lanjutkanButtonDiv" style="display: none;">
+                  <button type="submit" class="btn btn-primary px-4">Lanjutkan Pendaftaran</button>
+              </div>
+
                 <div class="h2 m-4">Total Harga: Rp </div>
-                <div class="h2 m-4" id="total"></div>
+                <div class="h2 m-4" id="total">
+                    <input type="text" name="hargaTotal" class="form-control form-control-lg text-center " readonly
+                        id="hargaTotal">
+                </div>
 
                 <script>
                     // Mendapatkan elemen-elemen select
@@ -90,50 +94,45 @@
                     const paketSelect = document.querySelector('#paket');
                     const durasiSelect = document.querySelector('#durasi');
                     const pesertaSelect = document.querySelector('#peserta');
+                    const hargaCaraBelajar = JSON.parse(JSON.stringify({!! json_encode($hargaCara) !!}));
+                    const hargaCategory = JSON.parse(JSON.stringify({!! json_encode($categoryCourseData) !!}));
+                    const hargaCourse = JSON.parse(JSON.stringify({!! json_encode($courseData) !!}));
+                    const hargaPaket = JSON.parse(JSON.stringify({!! json_encode($hargaPaket) !!}));
+                    const hargaDurasi = JSON.parse(JSON.stringify({!! json_encode($hargaDurasi) !!}));
+                    const hargaPeserta = JSON.parse(JSON.stringify({!! json_encode($hargaPeserta) !!}));
 
-                    // Mendefinisikan harga untuk setiap opsi
-                    const hargaCaraBelajar = {
-                        'Online': 10000,
-                        'Offline': 20000,
-                        'Hybrid': 20000
-                    };
+                    // Mengonversi nilai-nilai dalam objek menjadi integer
+                    Object.keys(hargaCaraBelajar).forEach(key => {
+                        hargaCaraBelajar[key] = parseInt(hargaCaraBelajar[key]);
+                    });
 
-                    const hargaCategory = {!! json_encode($categoryData) !!};
+                    Object.keys(hargaCategory).forEach(key => {
+                        hargaCategory[key] = parseInt(hargaCategory[key]);
+                    });
 
-                    const hargaCourse = {!! json_encode($courseData) !!};
+                    Object.keys(hargaCourse).forEach(key => {
+                        hargaCourse[key] = parseInt(hargaCourse[key]);
+                    });
+
+                    Object.keys(hargaPaket).forEach(key => {
+                        hargaPaket[key] = parseInt(hargaPaket[key]);
+                    });
+
+                    Object.keys(hargaDurasi).forEach(key => {
+                        hargaDurasi[key] = parseInt(hargaDurasi[key]);
+                    });
+
+                    Object.keys(hargaPeserta).forEach(key => {
+                        hargaPeserta[key] = parseInt(hargaPeserta[key]);
+                    });
 
 
-                    const hargaPaket = {
-                        '4': 5000, // Contoh harga untuk 4 Pertemuan/Bulan
-                        '8': 8000, // Contoh harga untuk 8 Pertemuan/Bulan
-                        '10': 10000 // Contoh harga untuk 10 Pertemuan/Bulan
-                    };
-
-                    const hargaDurasi = {
-                        '60': 3000, // Contoh harga untuk 60 menit / pertemuan
-                        '90': 4000, // Contoh harga untuk 90 menit / pertemuan
-                        '120': 5000 // Contoh harga untuk 120 menit / pertemuan
-                    };
-
-                    const hargaPeserta = {
-                        '1': 4000, // Harga untuk 1 orang / private (misalnya 0 jika tidak ada tambahan biaya)
-                        '2': 1000, // Harga tambahan untuk 2 orang / kelompok
-                        '3': 2000, // Harga tambahan untuk 3 orang / kelompok
-                        '4': 3000, // Harga tambahan untuk 4 orang / kelompok
-                        '5': 4000, // Harga tambahan untuk 5 orang / kelompok
-                        '6': 5000 // Harga tambahan untuk 6 orang / kelompok
-                    };
-
-                    // Mendapatkan tombol submit
                     const submitButton = document.querySelector('button[type="submit"]');
 
-                    // Menambahkan event listener untuk menghitung harga saat tombol submit ditekan
                     // Menambahkan event listener untuk menghitung harga saat tombol submit ditekan
                     submitButton.addEventListener('click', function(event) {
                         event.preventDefault(); // Menghentikan pengiriman form
 
-                        // console.log(hargaCategory)
-                        // Mendapatkan nilai dari setiap select
                         const selectedCaraBelajar = caraBelajarSelect.value;
                         const selectedCategory = categorySelect.value;
                         const selectedCourse = courseSelect.value;
@@ -141,10 +140,6 @@
                         const selectedDurasi = durasiSelect.value;
                         const selectedPeserta = pesertaSelect.value;
 
-                        console.log(selectedCategory  )
-
-
-                        // Menghitung harga
                         const totalHarga =
                             hargaCaraBelajar[selectedCaraBelajar] +
                             hargaCategory[selectedCategory] +
@@ -153,17 +148,36 @@
                             hargaDurasi[selectedDurasi] +
                             hargaPeserta[selectedPeserta];
 
+                        console.log(totalHarga);
 
-
-                        // Menampilkan hasil di dalam elemen dengan id "total"
                         const totalElement = document.getElementById('total');
-                        totalElement.textContent = ' Rp ' + totalHarga;
+                        const formattedTotalHarga = totalHarga.toLocaleString('id-ID');
+
+                        // Mengatur nilai input dengan hasil perhitungan yang telah diformat
+                        const hargaTotalInput = document.getElementById('hargaTotal');
+                        hargaTotalInput.value = formattedTotalHarga;
+
                     });
                 </script>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary px-4">Lanjutkan Pendaftaran</button>
-                </div>
+                <script>
+                    // Mendapatkan elemen tombol "Cek Harga"
+                    const cekHargaButton = document.getElementById('cekHargaButton');
+
+                    // Mendapatkan elemen div tombol "Lanjutkan Pendaftaran"
+                    const lanjutkanButtonDiv = document.getElementById('lanjutkanButtonDiv');
+
+                    // Menambahkan event listener untuk tombol "Cek Harga"
+                    cekHargaButton.addEventListener('click', function(event) {
+                        event.preventDefault(); // Menghentikan pengiriman form (jika perlu)
+
+                        // Mengubah tampilan elemen "Cek Harga" menjadi disembunyikan
+                        cekHargaButton.style.display = 'none';
+
+                        // Mengubah tampilan elemen "Lanjutkan Pendaftaran" menjadi ditampilkan
+                        lanjutkanButtonDiv.style.display = 'block';
+                    });
+                </script>
 
             </form>
         </div>
@@ -175,8 +189,6 @@
     $(document).ready(function() {
         $('#category').change(function() {
             let category_id = $(this).val();
-
-            // console.log($this)
 
             if (category_id) {
                 $.ajax({

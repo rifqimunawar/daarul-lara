@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryCource;
-use App\Models\Cource;
 use App\Models\Home;
+use App\Models\Cource;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\HargaCara;
+use App\Models\HargaPaket;
+use App\Models\HargaDurasi;
+use App\Models\HargaPeserta;
 use Illuminate\Http\Request;
+use App\Models\CategoryCource;
 
 class HomeController extends Controller
 {
@@ -45,42 +49,26 @@ class HomeController extends Controller
     }
 
     public function biaya() {
+      //ini diguanakan untuk looping select
       $category = CategoryCource ::all();
       $cource = Cource ::all();
+      $cara = HargaCara ::all();
+      $durasi = HargaDurasi ::all();
+      $paket = HargaPaket ::all();
+      $peserta = HargaPeserta ::all();
 
-      $categoryData = [
-        'Online' => 10000,
-        'Offline' => 20000,
-        'Hybrid' => 20000
-    ];
+      //ini digunakan untuk perhitungan
+      $categoryCourseData = CategoryCource::all()->pluck('rp', 'id')->toArray();
+      $courseData = Cource::all()->pluck('rp', 'id')->toArray();
+      $hargaCara = HargaCara::all()->pluck('rp', 'id')->toArray();
+      $hargaDurasi = HargaDurasi::all()->pluck('rp', 'id')->toArray();
+      $hargaPaket = HargaPaket::all()->pluck('rp', 'id')->toArray();
+      $hargaPeserta = HargaPeserta::all()->pluck('rp', 'id')->toArray();
+      
+      return view('root.biaya', compact('categoryCourseData', 'courseData', 
+      'hargaCara', 'hargaDurasi', 'hargaPaket', 'hargaPeserta',
     
-    // Contoh data untuk hargaCourse
-    $courseData = [
-        // Data kategori 1
-        1 => [
-            'id' => 1,
-            'rp' => 5000
-        ],
-        // Data kategori 2
-        2 => [
-            'id' => 2,
-            'rp' => 8000
-        ],
-        // Data kategori 3
-        3 => [
-            'id' => 3,
-            'rp' => 10000
-        ],
-        // ...
-    ];
-    
-    return view('root.biaya', [
-        'categoryData' => $categoryData,
-        'courseData' => $courseData,
-        'category' => $category,
-        'cource' => $cource
-        // ...
-    ]);
+      'category', 'cource', 'cara', 'durasi', 'paket', 'peserta'));
     }
 
 
@@ -109,6 +97,7 @@ class HomeController extends Controller
       $harga->paket = $request['paket'];
       $harga->durasi = $request['durasi'];
       $harga->peserta = $request['peserta'];
+      $harga->harga = $request['hargaTotal'];
       
       dd($harga);
       

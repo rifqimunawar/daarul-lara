@@ -66,5 +66,66 @@ class DatabaseSeeder extends Seeder
           'cource_id'=>'3'
         ]);
 
+
+        // ===========================================
+        DB::table('harga_caras')->insert([
+          'name'=> 'Online',
+          'rp'=>100000
+        ]);
+        DB::table('harga_caras')->insert([
+          'name'=> 'Offline',
+          'rp'=>150000
+        ]);
+        DB::table('harga_caras')->insert([
+          'name'=> 'Hybrid',
+          'rp'=>125000
+        ]);
+
+        // ===========================================
+        DB::table('harga_pakets')->insert([
+          'name'=> '4 Pertemuan / Bulan',
+          'rp'=>100000
+        ]);
+        DB::table('harga_pakets')->insert([
+          'name'=> '6 Pertemuan / Bulan',
+          'rp'=>150000
+        ]);
+        DB::table('harga_pakets')->insert([
+          'name'=> '8 Pertemuan / Bulan',
+          'rp'=>200000
+        ]);
+
+        // ===========================================
+        DB::table('harga_durasis')->insert([
+          'name'=> '60 Menit / Pertemuan',
+          'rp'=>100000
+        ]);
+        DB::table('harga_durasis')->insert([
+          'name'=> '90 Menit / Pertemuan',
+          'rp'=>'125000'
+        ]);
+        DB::table('harga_durasis')->insert([
+          'name'=> '120 Menit / Pertemuan',
+          'rp'=>150000
+        ]);
+
+        // ===========================================
+        DB::table('harga_pesertas')->insert([
+          'name'=> '1 Orang',
+          'rp'=>50000
+        ]);
+        DB::table('harga_pesertas')->insert([
+          'name'=> '2 Orang',
+          'rp'=>100000
+        ]);
+        DB::table('harga_pesertas')->insert([
+          'name'=> '3 Orang',
+          'rp'=>150000
+        ]);
+        DB::table('harga_pesertas')->insert([
+          'name'=> '4 Orang',
+          'rp'=>2000000
+        ]);
+
     }
 }
