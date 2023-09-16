@@ -30,6 +30,7 @@ Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');
 
 Route::get('/get-courses-by-category/{category_id}', [HomeController::class, 'getCoursesByCategory']);
 
+Route::post('/cek-harga', [HomeController::class, 'cek_harga'])->name('cekHarga');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

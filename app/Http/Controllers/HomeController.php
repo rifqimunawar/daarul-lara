@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoryCource;
 use App\Models\Cource;
 use App\Models\Home;
+use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,42 @@ class HomeController extends Controller
     }
 
     public function biaya() {
-      return view('root.biaya');
+      $category = CategoryCource ::all();
+      $cource = Cource ::all();
+
+      $categoryData = [
+        'Online' => 10000,
+        'Offline' => 20000,
+        'Hybrid' => 20000
+    ];
+    
+    // Contoh data untuk hargaCourse
+    $courseData = [
+        // Data kategori 1
+        1 => [
+            'id' => 1,
+            'rp' => 5000
+        ],
+        // Data kategori 2
+        2 => [
+            'id' => 2,
+            'rp' => 8000
+        ],
+        // Data kategori 3
+        3 => [
+            'id' => 3,
+            'rp' => 10000
+        ],
+        // ...
+    ];
+    
+    return view('root.biaya', [
+        'categoryData' => $categoryData,
+        'courseData' => $courseData,
+        'category' => $category,
+        'cource' => $cource
+        // ...
+    ]);
     }
 
 
@@ -54,6 +90,30 @@ class HomeController extends Controller
 
         return response()->json($courses);
     }
+
+
+    public function cek_harga(Request $request) {
+      // $validatedData = $request->validate([
+      //     'cara' => 'required',
+      //     'category' => 'required',
+      //     'cource' => 'required',
+      //     'paket' => 'required',
+      //     'durasi' => 'required',
+      //     'peserta' => 'required',
+      // ]);
+  
+      $harga = new Student();
+      $harga->cara = $request['cara'];
+      $harga->category = $request['category'];
+      $harga->cource = $request->input('cource'); // Set it as a property of $harga
+      $harga->paket = $request['paket'];
+      $harga->durasi = $request['durasi'];
+      $harga->peserta = $request['peserta'];
+      
+      dd($harga);
+      
+  }
+  
 
     public function daftar() {
       return view('root.daftar');

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('category_cources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('rp')->default('50000');
             $table->string('description')->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
