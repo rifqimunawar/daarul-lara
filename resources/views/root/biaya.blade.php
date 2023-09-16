@@ -10,9 +10,9 @@
                 @csrf
                 <div class="mb-3">
                     <label for="cara" class="mb-2 d-flex justify-content-start fs-4 pl-3">Cara Belajar</label>
-                    <select class="form-select form-select-lg mb-3" name="cara" id="caraBelajar"
+                    <select class="form-select form-select-lg mb-3" name="cara" required id="caraBelajar"
                         aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                         @foreach ($cara as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -22,8 +22,8 @@
                 <div class="mb-3">
                     <label for="category" class="mb-2 d-flex justify-content-start fs-4 pl-3">Category Courses</label>
                     <select id="category" name="category" class="form-select form-select-lg mb-3"
-                        aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                         @foreach ($category as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -34,16 +34,16 @@
                 <div class="mb-3">
                     <label for="cource" class="mb-2 d-flex justify-content-start fs-4 pl-3">Courses</label>
                     <select id="cource" name="cource" class="form-select form-select-lg mb-3"
-                        aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="paket" class="mb-2 d-flex justify-content-start fs-4 pl-3">Paket Kursus / Bulan</label>
                     <select id="paket" name="paket" class="form-select form-select-lg mb-3"
-                        aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                         @foreach ($paket as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -53,8 +53,8 @@
                 <div class="mb-3">
                     <label for="durasi" class="mb-2 d-flex justify-content-start fs-4 pl-3">Durasi Kursus</label>
                     <select id="durasi" name="durasi" class="form-select form-select-lg mb-3"
-                        aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                         @foreach ($durasi as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -64,8 +64,8 @@
                 <div class="mb-3">
                     <label for="peserta" class="mb-2 d-flex justify-content-start fs-4 pl-3">Peserta Kursus</label>
                     <select id="peserta" name="peserta" class="form-select form-select-lg mb-3"
-                        aria-label="Large select example">
-                        <option selected>---- Pilih Salah Satu ----</option>
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
                         @foreach ($peserta as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach

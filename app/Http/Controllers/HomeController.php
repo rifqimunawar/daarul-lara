@@ -10,6 +10,7 @@ use App\Models\HargaCara;
 use App\Models\HargaPaket;
 use App\Models\HargaDurasi;
 use App\Models\HargaPeserta;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\CategoryCource;
 
@@ -79,34 +80,84 @@ class HomeController extends Controller
         return response()->json($courses);
     }
 
-
     public function cek_harga(Request $request) {
-      // $validatedData = $request->validate([
-      //     'cara' => 'required',
-      //     'category' => 'required',
-      //     'cource' => 'required',
-      //     'paket' => 'required',
-      //     'durasi' => 'required',
-      //     'peserta' => 'required',
-      // ]);
+      $validatedData = $request->validate([
+          'cara' => 'required',
+          'category' => 'required',
+          'cource' => 'required',
+          'paket' => 'required',
+          'durasi' => 'required',
+          'peserta' => 'required',
+      ], [
+          'required' => 'Kolom :attribute harus diisi.',
+      ]);
   
+      // Simpan data ke dalam model Student
       $harga = new Student();
-      $harga->cara = $request['cara'];
-      $harga->category = $request['category'];
-      $harga->cource = $request->input('cource'); // Set it as a property of $harga
-      $harga->paket = $request['paket'];
-      $harga->durasi = $request['durasi'];
-      $harga->peserta = $request['peserta'];
-      $harga->harga = $request['hargaTotal'];
-      
-      dd($harga);
-      
+      $harga->cara_id = $validatedData['cara'];
+      $harga->category_cource_id = $validatedData['category'];
+      $harga->cource_id = $validatedData['cource'];
+      $harga->paket_id = $validatedData['paket'];
+      $harga->durasi_id = $validatedData['durasi'];
+      $harga->peserta_id = $validatedData['peserta'];
+      $harga->harga = $request->input('hargaTotal');
+      // $harga->save();
+  
+      // Kemudian, Anda dapat mengambil nilai-nilai dari relasi
+      $category = $harga->categoryCource->name;
+      $cource = $harga->cource->name;
+      $cara = $harga->hargaCara->name;
+      $durasi = $harga->hargaDurasi->name;
+      $paket = $harga->hargaPaket->name;
+      $peserta = $harga->hargaPeserta->name;
+  
+      // Di sini Anda dapat melakukan operasi lain jika diperlukan
+  
+      $hargaCara = $harga->cara_id;
+      $hargaCategory = $harga->category_cource_id;
+      $hargaCource = $harga->cource_id;
+      $hargaPaket = $harga->paket_id;
+      $hargaDurasi = $harga->durasi_id;
+      $hargaPeserta = $harga->peserta_id;
+      // dd($hargaCara);
+  
+      return view('root.daftar', 
+      compact(
+      'harga', 'category', 
+      'cource', 'cara', 'durasi', 'paket', 'peserta',
+
+      'hargaCara', 'hargaCategory', 'hargaCource', 'hargaPaket',
+      'hargaPaket', 'hargaDurasi', 'hargaPeserta'));
   }
   
+  
+  
 
-    public function daftar() {
-      return view('root.daftar');
-    }
+  public function daftar(Request $request) {
+
+    // Membuat objek Student
+    $student = new Student();
+    $student->name = $request->input('name');
+    $student->wa = $request->input('wa');
+    $student->alamat = $request->input('alamat');
+    $student->cara_id = $request->input('cara_id');
+    $student->category_cource_id = $request->input('category_cource_id');
+    $student->cource_id = $request->input('cource_id');
+    $student->durasi_id = $request->input('durasi_id');
+    $student->paket_id = $request->input('paket_id');
+    $student->peserta_id = $request->input('peserta_id');
+    $student->harga = $request->input('harga');
+    // Menyimpan data ke dalam database
+    // dd($student);
+    $student->save();
+
+    // Menampilkan pesan flash jika Anda menggunakan laravel-sweetalert atau sejenisnya
+    // Pastikan Anda telah menginstal dan mengkonfigurasi pustaka tersebut dengan benar
+    // alert('Selamat!', 'Data berhasil disimpan.');
+
+    // Kembali ke tampilan 'root.biaya'
+    return redirect()->route('home');
+}
 
 
 
