@@ -12,7 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+      $students = Student::with('categoryCource', 'cource')->latest()->get();
+      // dd($students);
+        return view('dashboard.students.index', compact('students'));
     }
 
     /**

@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategoryCourceController;
-use App\Http\Controllers\CourceController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CourceController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryCourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');
 Route::post('/daftar', [HomeController::class, 'daftar'])->name('daftar');
 Route::get('/get-courses-by-category/{category_id}', [HomeController::class, 'getCoursesByCategory']);
 Route::post('/cek-harga', [HomeController::class, 'cek_harga'])->name('cekHarga');
+
+
+Route::get('/dashboard/student', [StudentController::class, 'index'])->name('index.student');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

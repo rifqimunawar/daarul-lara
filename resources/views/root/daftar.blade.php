@@ -30,7 +30,7 @@
 
           {{-- @dd($harga) --}}
 
-          <div >
+          <div hidden>
             <input type="text" name="cara_id" id="" value="{{ $hargaCara }}"readonly>
             <input type="text" name="category_cource_id" id="" value="{{ $hargaCategory }}"readonly>
             <input type="text" name="cource_id" id="" value="{{ $hargaCource }}"readonly>
