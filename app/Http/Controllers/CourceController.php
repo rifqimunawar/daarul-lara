@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryCource;
 use App\Models\Cource;
 use Illuminate\Http\Request;
+use App\Models\CategoryCource;
+use Intervention\Image\Facades\Image;
 
 class CourceController extends Controller
 {
@@ -41,6 +42,19 @@ class CourceController extends Controller
       
       $cource->name = $request->input('name'); 
       $cource->category_cource_id = $request->input('category_cource_id'); 
+
+      
+      if ($request->hasFile('img')) {
+        $image = $request->file('img');
+        $newFileName = 'courses' . '_' . $request->name . '_' . now()->timestamp . '.' . $image->getClientOriginalExtension();
+
+        // Simpan gambar yang diunggah ke direktori penyimpanan sambil mengkompresi ulang
+        $compressedImage = Image::make($image)->resize(700, null, function ($constraint) {
+          $constraint->aspectRatio();
+          })->save(public_path('img/' . $newFileName));
+
+        $cource->img =  $newFileName;
+      }
       
       $cource->save();
   
@@ -76,12 +90,26 @@ class CourceController extends Controller
             'name' => 'required', 
             'category_cource_id' => 'required', 
             'status' => 'required', 
+            'img' => 'required', 
         ]);
 
         $cource->name = $request->input('name'); 
         $cource->category_cource_id = $request->input('category_cource_id'); 
         $cource->status = $request->input('status'); 
+
+        if ($request->hasFile('img')) {
+          $image = $request->file('img');
+          $newFileName = 'courses' . '_' . $request->name . '_' . now()->timestamp . '.' . $image->getClientOriginalExtension();
+
+          // Simpan gambar yang diunggah ke direktori penyimpanan sambil mengkompresi ulang
+          $compressedImage = Image::make($image)->resize(700, null, function ($constraint) {
+            $constraint->aspectRatio();
+            })->save(public_path('img/' . $newFileName));
+
+          $cource->img =  $newFileName;
+        }
         
+        dd($cource);
         $cource->save();
         
         // dd($cource);

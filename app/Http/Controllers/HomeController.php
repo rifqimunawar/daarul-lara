@@ -10,9 +10,9 @@ use App\Models\HargaCara;
 use App\Models\HargaPaket;
 use App\Models\HargaDurasi;
 use App\Models\HargaPeserta;
-use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\CategoryCource;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -27,9 +27,10 @@ class HomeController extends Controller
         ->first(); // Ambil satu kategori kursus dengan jumlah kursus terbanyak
 
       $teacher = Teacher::latest()->get();
+      $cource = Cource ::latest()->get();
 
       // ddd($category_by_course);
-        return view('root.home', compact('teacher', 'category_by_latest', 'category_by_course'));
+        return view('root.home', compact('teacher', 'category_by_latest', 'category_by_course', 'cource'));
     }
 
     public function about()
@@ -156,6 +157,7 @@ class HomeController extends Controller
     // alert('Selamat!', 'Data berhasil disimpan.');
 
     // Kembali ke tampilan 'root.biaya'
+    Alert::success('Pendaftaran Berhasil', 'Kami akan menghubungi anda melalui nomor WhatsApps yang tertera');
     return redirect()->route('home');
 }
 

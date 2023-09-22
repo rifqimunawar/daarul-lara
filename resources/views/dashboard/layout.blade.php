@@ -40,6 +40,9 @@
 
         </div>
     </div>
+
+    <!-- Include sweet alert notification -->
+    @include('sweetalert::alert')
 </body>
 
 </html>

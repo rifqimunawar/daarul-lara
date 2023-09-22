@@ -76,6 +76,9 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('root_template/js/main.js') }}"></script>
+
+    <!-- Include sweet alert notification -->
+    @include('sweetalert::alert')
 </body>
 
 </html>
