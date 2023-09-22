@@ -24,12 +24,13 @@ class HomeController extends Controller
       $category_by_latest = CategoryCource::latest()->get();
       $category_by_course = CategoryCource::withCount('cources')
         ->orderBy('cources_count', 'desc') // Urutkan berdasarkan jumlah kursus secara descending (terbanyak ke terendah)
-        ->first(); // Ambil satu kategori kursus dengan jumlah kursus terbanyak
+        ->take(3)
+        ->get();
 
       $teacher = Teacher::latest()->get();
       $cource = Cource ::latest()->get();
 
-      // ddd($category_by_course);
+      // dd($category_by_course);
         return view('root.home', compact('teacher', 'category_by_latest', 'category_by_course', 'cource'));
     }
 
