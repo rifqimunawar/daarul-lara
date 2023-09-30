@@ -26,6 +26,8 @@ use App\Http\Controllers\CategoryCourceController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/cources', [HomeController::class, 'cources'])->name('cources');
+Route::get('/cource/{id}/detail ', [HomeController::class, 'courcesDetail'])->name('cources');
+Route::get('/category/{id}', [HomeController::class, 'categoryList'])->name('categoryList');
 
 Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');
 Route::post('/daftar', [HomeController::class, 'daftar'])->name('daftar');

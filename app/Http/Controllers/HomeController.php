@@ -50,6 +50,31 @@ class HomeController extends Controller
     public function cources() {
       return view('root.cources');
     }
+    public function categoryList($id, Request $request) {
+
+      $category = CategoryCource :: with('cources')-> find($id);
+
+      // dd($category);
+
+      return view('root.categoryList', compact('category'));
+    }
+
+
+    public function courcesDetail($id, Request $request) {
+      
+      $cource = Cource::find($id);
+      return view('root.courcesDetail', compact('cource'));
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function biaya() {
       //ini diguanakan untuk looping select

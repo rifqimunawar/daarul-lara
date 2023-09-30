@@ -156,7 +156,7 @@
             <div class="row g-4 justify-content-center">
                       @foreach ($category_by_course as $item)
                         <div class="col-lg-4 col-md-4 wow zoomIn" data-wow-delay="0.1s">
-                            <a class="position-relative d-block overflow-hidden" href="">
+                            <a class="position-relative d-block overflow-hidden" href="/category/{{ $item->id }}">
                                 <img class="img-fluid object-fit-cover border rounded" src="{{ asset('img/'. $item->img) }}" alt="">
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                                     style="margin: 1px;">

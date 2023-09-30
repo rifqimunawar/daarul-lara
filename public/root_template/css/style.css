@@ -6,6 +6,13 @@
   /* zoom: 90%; */
 }
 
+.w-24{
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 .fw-medium {
   font-weight: 600 !important;
 }
