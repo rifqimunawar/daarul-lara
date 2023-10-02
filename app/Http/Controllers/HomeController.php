@@ -48,7 +48,10 @@ class HomeController extends Controller
     }
 
     public function cources() {
-      return view('root.cources');
+
+      $category = CategoryCource ::all();
+      $cource = Cource ::latest()->get();
+      return view('root.cources', compact('category', 'cource'));
     }
     public function categoryList($id, Request $request) {
 
