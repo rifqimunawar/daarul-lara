@@ -9,6 +9,8 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $guarded=([]);
+
       public function categoryCource()
       {
           return $this->belongsTo(CategoryCource::class, 'category_cource_id');
@@ -17,6 +19,11 @@ class Student extends Model
       public function cource()
       {
           return $this->belongsTo(Cource::class, 'cource_id');
+      }
+  
+      public function teacher()
+      {
+          return $this->belongsTo(Teacher::class, 'teacher_id');
       }
   
       public function hargaCara()

@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-      $students = Student::with('categoryCource', 'cource')->latest()->get();
+      $students = Student::with('categoryCource', 'cource', 'teacher')->latest()->get();
       // dd($students);
         return view('dashboard.students.index', compact('students'));
     }
@@ -44,18 +44,25 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit($id, Student $student)
     {
-        //
+        $student = Student ::findOrFail($id);
+        
+        return view('dashboard.students.edit', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update($id, Request $request)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->status = $request->input('status'); 
+        $student->save();
+    
+        return redirect()->route('index.student');
     }
+    
 
     /**
      * Remove the specified resource from storage.

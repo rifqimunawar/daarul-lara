@@ -34,6 +34,7 @@
             <input type="text" name="cara_id" id="" value="{{ $hargaCara }}"readonly>
             <input type="text" name="category_cource_id" id="" value="{{ $hargaCategory }}"readonly>
             <input type="text" name="cource_id" id="" value="{{ $hargaCource }}"readonly>
+            <input type="text" name="teacher_id" id="" value="{{ $hargaTeacher }}"readonly>
             <input type="text" name="durasi_id" id="" value="{{ $hargaDurasi }}"readonly>
             <input type="text" name="paket_id" id="" value="{{ $hargaPaket }}"readonly>
             <input type="text" name="peserta_id" id="" value="{{ $hargaPeserta }}"readonly>
@@ -81,24 +82,30 @@
             </tr>
             <tr>
               <th scope="row">4</th>
+              <td class="text-start">Pengajar</td>
+              <td class="text-start">{{ $teacher   }}</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
               <td class="text-start">Paket Kursus / Bulan</td>
               <td class="text-start">{{ $paket }}</td>
               <td> </td>
             </tr>
             <tr>
-              <th scope="row">5</th>
+              <th scope="row">6</th>
               <td class="text-start">Durasi Kursus</td>
               <td class="text-start">{{ $durasi }}</td>
               <td> </td>
             </tr>
             <tr>
-              <th scope="row">6</th>
+              <th scope="row">7</th>
               <td class="text-start">Peserta Kursus</td>
               <td class="text-start">{{ $peserta }}</td>
               <td> </td>
             </tr>
             <tr>
-              <th scope="row">7</th>
+              <th scope="row">8</th>
               <td colspan="2">Total Harga</td>
               <td>{{ $harga->harga }}</td>
             </tr>

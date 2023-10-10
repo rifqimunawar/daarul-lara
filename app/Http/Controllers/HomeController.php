@@ -126,6 +126,7 @@ class HomeController extends Controller
           'cara' => 'required',
           'category' => 'required',
           'cource' => 'required',
+          'teacher' => 'required',
           'paket' => 'required',
           'durasi' => 'required',
           'peserta' => 'required',
@@ -138,6 +139,7 @@ class HomeController extends Controller
       $harga->cara_id = $validatedData['cara'];
       $harga->category_cource_id = $validatedData['category'];
       $harga->cource_id = $validatedData['cource'];
+      $harga->teacher_id = $validatedData['teacher'];
       $harga->paket_id = $validatedData['paket'];
       $harga->durasi_id = $validatedData['durasi'];
       $harga->peserta_id = $validatedData['peserta'];
@@ -147,6 +149,7 @@ class HomeController extends Controller
       // Kemudian, Anda dapat mengambil nilai-nilai dari relasi
       $category = $harga->categoryCource->name;
       $cource = $harga->cource->name;
+      $teacher = $harga->teacher->name;
       $cara = $harga->hargaCara->name;
       $durasi = $harga->hargaDurasi->name;
       $paket = $harga->hargaPaket->name;
@@ -157,6 +160,7 @@ class HomeController extends Controller
       $hargaCara = $harga->cara_id;
       $hargaCategory = $harga->category_cource_id;
       $hargaCource = $harga->cource_id;
+      $hargaTeacher = $harga->teacher_id;
       $hargaPaket = $harga->paket_id;
       $hargaDurasi = $harga->durasi_id;
       $hargaPeserta = $harga->peserta_id;
@@ -164,11 +168,11 @@ class HomeController extends Controller
   
       return view('root.daftar', 
       compact(
-      'harga', 'category', 
+      'harga', 'category', 'teacher',
       'cource', 'cara', 'durasi', 'paket', 'peserta',
 
-      'hargaCara', 'hargaCategory', 'hargaCource', 'hargaPaket',
-      'hargaPaket', 'hargaDurasi', 'hargaPeserta'));
+      'hargaCara', 'hargaCategory', 'hargaCource', 'hargaTeacher', 
+      'hargaPaket', 'hargaPaket', 'hargaDurasi', 'hargaPeserta'));
   }
   
   
@@ -184,6 +188,7 @@ class HomeController extends Controller
     $student->cara_id = $request->input('cara_id');
     $student->category_cource_id = $request->input('category_cource_id');
     $student->cource_id = $request->input('cource_id');
+    $student->teacher_id = $request->input('teacher_id');
     $student->durasi_id = $request->input('durasi_id');
     $student->paket_id = $request->input('paket_id');
     $student->peserta_id = $request->input('peserta_id');

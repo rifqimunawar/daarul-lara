@@ -20,6 +20,7 @@
                                 <th class="px-4 py-3">Category Cource</th>
                                 <th class="px-4 py-3">Cource</th>
                                 <th class="px-4 py-3">Teacher</th>
+                                <th class="px-4 py-3">Status Pembayaran</th>
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
@@ -27,21 +28,36 @@
                             @foreach ($students as $item)
                                 <tr class="text-gray-700 dark:text-gray-400">
                                     <td class="px-4 py-3 text-sm">
-                                      {{ $item->name }}
+                                        {{ $item->name }}
                                     </td>
 
                                     <td class="px-4 py-3 text-sm">
-                                      {{ $item->categoryCource->name }}
+                                        {{ $item->categoryCource->name }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $item->cource->name }}
                                     </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        @if ($item->teacher)
+                                            {{ $item->teacher->name }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+
+                                    <td class="px-4 py-3 text-sm">
+                                      @if ($item->status == 0)
+                                        Belum Lunas
+                                      @else
+                                        Lunas
+                                      @endif
+                                  </td>
 
                                     <td class="px-4 py-3">
 
                                         <div class="flex items-center space-x-4 text-sm">
 
-                                            <a href="{{ route('edit.teacher', $item->id) }}"
+                                            <a href="{{ route('edit.student', $item->id) }}"
                                                 class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"><svg
                                                     class="w-5 h-5" aria-hidden="true" fill="currentColor"
                                                     viewBox="0 0 20 20">

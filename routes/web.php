@@ -37,6 +37,8 @@ Route::post('/cek-harga', [HomeController::class, 'cek_harga'])->name('cekHarga'
 
 
 Route::get('/dashboard/student', [StudentController::class, 'index'])->name('index.student');
+Route::get('/dashboard/student/{id}/edit/', [StudentController::class, 'edit'])->name('edit.student');
+Route::put('/dashboard/student/{id}/update/', [StudentController::class, 'update'])->name('update.student');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
