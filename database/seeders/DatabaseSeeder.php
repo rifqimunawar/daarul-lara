@@ -55,15 +55,18 @@ class DatabaseSeeder extends Seeder
         // ===========================================
         DB::table('teachers')->insert([
           'name'=> 'rifqi',
-          'cource_id'=>'1'
+          'cource_id'=>'1',
+          'rp'=>'80000'
         ]);
         DB::table('teachers')->insert([
           'name'=> 'munawar',
-          'cource_id'=>'1'
+          'cource_id'=>'1',
+          'rp'=>'80000'
         ]);
         DB::table('teachers')->insert([
           'name'=> 'ridwan',
-          'cource_id'=>'3'
+          'cource_id'=>'3',
+          'rp'=>'90000'
         ]);
 
 

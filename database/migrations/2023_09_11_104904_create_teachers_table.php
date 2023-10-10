@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('img')->default('user.png');
             $table->string('bio')->nullable();
+            $table->string('rp')->default('50000');
             $table->unsignedBigInteger('cource_id');
             $table->timestamps();
 

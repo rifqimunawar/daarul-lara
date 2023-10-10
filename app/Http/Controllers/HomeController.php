@@ -82,11 +82,12 @@ class HomeController extends Controller
     public function biaya() {
       //ini diguanakan untuk looping select
       $category = CategoryCource ::all();
-      $cource = Cource ::all();
+      $cource = Cource ::with('teachers')->get();
       $cara = HargaCara ::all();
       $durasi = HargaDurasi ::all();
       $paket = HargaPaket ::all();
       $peserta = HargaPeserta ::all();
+      $teacher = Teacher::all();
 
       //ini digunakan untuk perhitungan
       $categoryCourseData = CategoryCource::all()->pluck('rp', 'id')->toArray();
@@ -95,9 +96,12 @@ class HomeController extends Controller
       $hargaDurasi = HargaDurasi::all()->pluck('rp', 'id')->toArray();
       $hargaPaket = HargaPaket::all()->pluck('rp', 'id')->toArray();
       $hargaPeserta = HargaPeserta::all()->pluck('rp', 'id')->toArray();
+      $hargaTeacher = Teacher::all()->pluck('rp', 'id')->toArray();
+
+      // dd($cource);
       
       return view('root.biaya', compact('categoryCourseData', 'courseData', 
-      'hargaCara', 'hargaDurasi', 'hargaPaket', 'hargaPeserta',
+      'hargaCara', 'hargaDurasi', 'hargaPaket', 'hargaPeserta', 'hargaTeacher',
     
       'category', 'cource', 'cara', 'durasi', 'paket', 'peserta'));
     }
@@ -108,6 +112,13 @@ class HomeController extends Controller
         $courses = Cource::where('category_cource_id', $category_id)->get();
 
         return response()->json($courses);
+    }
+
+    public function getTeacherByCource($cource_id)
+    {
+        $teacher = Teacher::where('cource_id', $cource_id)->get();
+
+        return response()->json($teacher);
     }
 
     public function cek_harga(Request $request) {

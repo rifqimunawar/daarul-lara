@@ -40,6 +40,14 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="teacher" class="mb-2 d-flex justify-content-start fs-4 pl-3">Pengajar</label>
+                    <select id="teacher" name="teacher" class="form-select form-select-lg mb-3"
+                        aria-label="Large select example" required>
+                        <option disabled selected>---- Pilih Salah Satu ----</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="paket" class="mb-2 d-flex justify-content-start fs-4 pl-3">Paket Kursus / Bulan</label>
                     <select id="paket" name="paket" class="form-select form-select-lg mb-3"
                         aria-label="Large select example" required>
@@ -77,8 +85,8 @@
                 </div>
 
                 <div class="text-center" id="lanjutkanButtonDiv" style="display: none;">
-                  <button type="submit" class="btn btn-primary px-4">Lanjutkan Pendaftaran</button>
-              </div>
+                    <button type="submit" class="btn btn-primary px-4">Lanjutkan Pendaftaran</button>
+                </div>
 
                 <div class="h2 m-4">Total Harga: Rp </div>
                 <div class="h2 m-4" id="total">
@@ -91,6 +99,7 @@
                     const caraBelajarSelect = document.querySelector('#caraBelajar');
                     const categorySelect = document.querySelector('#category');
                     const courseSelect = document.querySelector('#cource');
+                    const teacherSelect = document.querySelector('#teacher');
                     const paketSelect = document.querySelector('#paket');
                     const durasiSelect = document.querySelector('#durasi');
                     const pesertaSelect = document.querySelector('#peserta');
@@ -99,6 +108,7 @@
                     const hargaCourse = JSON.parse(JSON.stringify({!! json_encode($courseData) !!}));
                     const hargaPaket = JSON.parse(JSON.stringify({!! json_encode($hargaPaket) !!}));
                     const hargaDurasi = JSON.parse(JSON.stringify({!! json_encode($hargaDurasi) !!}));
+                    const hargaTeacher = JSON.parse(JSON.stringify({!! json_encode($hargaTeacher) !!}));
                     const hargaPeserta = JSON.parse(JSON.stringify({!! json_encode($hargaPeserta) !!}));
 
                     // Mengonversi nilai-nilai dalam objek menjadi integer
@@ -118,6 +128,10 @@
                         hargaPaket[key] = parseInt(hargaPaket[key]);
                     });
 
+                    Object.keys(hargaTeacher).forEach(key => {
+                        hargaTeacher[key] = parseInt(hargaTeacher[key]);
+                    });
+
                     Object.keys(hargaDurasi).forEach(key => {
                         hargaDurasi[key] = parseInt(hargaDurasi[key]);
                     });
@@ -129,35 +143,36 @@
 
                     const submitButton = document.querySelector('button[type="submit"]');
 
-                    // Menambahkan event listener untuk menghitung harga saat tombol submit ditekan
-                    submitButton.addEventListener('click', function(event) {
-                        event.preventDefault(); // Menghentikan pengiriman form
+                    // Menambahkan event listener untuk menghitung harga saat pilihan dropdown berubah
+                    [caraBelajarSelect, categorySelect, courseSelect, teacherSelect, paketSelect, durasiSelect, pesertaSelect].forEach(
+                            select => {
+                                select.addEventListener('change', function() {
+                                    const selectedCaraBelajar = caraBelajarSelect.value;
+                                    const selectedCategory = categorySelect.value;
+                                    const selectedCourse = courseSelect.value;
+                                    const selectedTeacher = teacherSelect.value;
+                                    const selectedPaket = paketSelect.value;
+                                    const selectedDurasi = durasiSelect.value;
+                                    const selectedPeserta = pesertaSelect.value;
 
-                        const selectedCaraBelajar = caraBelajarSelect.value;
-                        const selectedCategory = categorySelect.value;
-                        const selectedCourse = courseSelect.value;
-                        const selectedPaket = paketSelect.value;
-                        const selectedDurasi = durasiSelect.value;
-                        const selectedPeserta = pesertaSelect.value;
+                                    const totalHarga =
+                                        hargaCaraBelajar[selectedCaraBelajar] +
+                                        hargaCategory[selectedCategory] +
+                                        hargaCourse[selectedCourse] +
+                                        hargaTeacher[selectedTeacher] +
+                                        hargaPaket[selectedPaket] +
+                                        hargaDurasi[selectedDurasi] +
+                                        hargaPeserta[selectedPeserta];
 
-                        const totalHarga =
-                            hargaCaraBelajar[selectedCaraBelajar] +
-                            hargaCategory[selectedCategory] +
-                            hargaCourse[selectedCourse] +
-                            hargaPaket[selectedPaket] +
-                            hargaDurasi[selectedDurasi] +
-                            hargaPeserta[selectedPeserta];
+                                    const totalElement = document.getElementById('total');
+                                    const formattedTotalHarga = totalHarga.toLocaleString('id-ID');
 
-                        console.log(totalHarga);
+                                    // Mengatur nilai input dengan hasil perhitungan yang telah diformat
+                                    const hargaTotalInput = document.getElementById('hargaTotal');
+                                    hargaTotalInput.value = formattedTotalHarga;
 
-                        const totalElement = document.getElementById('total');
-                        const formattedTotalHarga = totalHarga.toLocaleString('id-ID');
-
-                        // Mengatur nilai input dengan hasil perhitungan yang telah diformat
-                        const hargaTotalInput = document.getElementById('hargaTotal');
-                        hargaTotalInput.value = formattedTotalHarga;
-
-                    });
+                                });
+                              });
                 </script>
 
                 <script>
@@ -208,6 +223,35 @@
             } else {
                 $('#cource').empty();
                 $('#cource').append('<option selected>---- Pilih Salah Satu ----</option>');
+            }
+        });
+    });
+
+
+    // ini digunakan untuk select teacher by courses 
+    // =================================================
+    $(document).ready(function() {
+        $('#cource').change(function() {
+            let cource_id = $(this).val();
+
+            if (cource_id) {
+                $.ajax({
+                    url: '/get-teacher-by-cource/' + cource_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#teacher').empty();
+                        $('#teacher').append(
+                            '<option selected>---- Pilih Salah Satu ----</option>');
+                        $.each(data, function(key, value) {
+                            $('#teacher').append('<option value="' + value.id +
+                                '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#teacher').empty();
+                $('#teacher').append('<option selected>---- Pilih Salah Satu ----</option>');
             }
         });
     });

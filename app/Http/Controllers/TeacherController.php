@@ -17,6 +17,7 @@ class TeacherController extends Controller
       {
         $teacher = Teacher::latest()->get();
           
+        // dd($teacher);
         return view('dashboard.teacher.index', compact('teacher') );
       }
     }

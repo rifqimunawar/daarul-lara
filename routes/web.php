@@ -32,6 +32,7 @@ Route::get('/category/{id}', [HomeController::class, 'categoryList'])->name('cat
 Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');
 Route::post('/daftar', [HomeController::class, 'daftar'])->name('daftar');
 Route::get('/get-courses-by-category/{category_id}', [HomeController::class, 'getCoursesByCategory']);
+Route::get('/get-teacher-by-cource/{cource_id}', [HomeController::class, 'getTeacherByCource']);
 Route::post('/cek-harga', [HomeController::class, 'cek_harga'])->name('cekHarga');
 
 
