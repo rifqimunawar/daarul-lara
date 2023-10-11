@@ -7,7 +7,7 @@
         <div class="container px-6 mx-auto grid">
             <!-- With actions -->
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                Data Student
+                Data Pendaftar
             </h2>
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -48,12 +48,12 @@
                                     <td class="px-4 py-3 text-sm">
                                         @if ($item->status == 0)
                                             <h3
-                                                class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                                                class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-s font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
                                                 Belum dikonfirmasi
                                             </h3>
                                         @else
                                             <h3
-                                                class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">
+                                                class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-s font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">
                                                 Terkonfirmasi
                                             </h3>
                                         @endif

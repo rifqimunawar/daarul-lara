@@ -14,9 +14,18 @@ class StudentController extends Controller
     {
       $students = Student::with('categoryCource', 'cource', 'teacher')->latest()->get();
       // dd($students);
-        return view('dashboard.students.index', compact('students'));
+        return view('dashboard.students.pendaftar', compact('students'));
     }
 
+    function studentAktif() {
+        $students = Student
+        ::with('categoryCource', 'cource', 'teacher')
+        ->where ('status', 1)
+        ->latest()->get();
+
+        // dd($students);
+        return view('dashboard.students.aktif', compact('students'));
+    }
     /**
      * Show the form for creating a new resource.
      */

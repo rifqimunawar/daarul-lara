@@ -40,6 +40,7 @@ Route::get('/dashboard/student', [StudentController::class, 'index'])->name('ind
 Route::get('/dashboard/student/{id}/edit/', [StudentController::class, 'edit'])->name('edit.student');
 Route::put('/dashboard/student/{id}/update/', [StudentController::class, 'update'])->name('update.student');
 
+Route::get('/dashboard/student/aktif', [StudentController::class, 'studentAktif'])->name('index.studentAktif');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/category-cources', [CategoryCourceController::class, 'index'])->name('index.category-cources');
