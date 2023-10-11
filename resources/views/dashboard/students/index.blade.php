@@ -46,12 +46,18 @@
                                     </td>
 
                                     <td class="px-4 py-3 text-sm">
-                                      @if ($item->status == 0)
-                                        Konfirmasi Sekarang
-                                      @else
-                                        Lain Kali
-                                      @endif
-                                  </td>
+                                        @if ($item->status == 0)
+                                            <h3
+                                                class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                                                Belum dikonfirmasi
+                                            </h3>
+                                        @else
+                                            <h3
+                                                class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">
+                                                Terkonfirmasi
+                                            </h3>
+                                        @endif
+                                    </td>
 
                                     <td class="px-4 py-3">
 
