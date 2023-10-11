@@ -134,7 +134,8 @@
                       <span class="text-gray-700 dark:text-gray-400">
                           KONFIRMASI
                       </span>
-                      <p>Jika sudah melakukan pembayaran pilih "ya"</p>
+                      <p class="text-gray-700 dark:text-gray-400">
+                        Jika sudah melakukan pembayaran pilih "ya"</p>
                       <select
                           class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                           name="status" class="form-select">

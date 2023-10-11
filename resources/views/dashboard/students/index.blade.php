@@ -20,7 +20,7 @@
                                 <th class="px-4 py-3">Category Cource</th>
                                 <th class="px-4 py-3">Cource</th>
                                 <th class="px-4 py-3">Teacher</th>
-                                <th class="px-4 py-3">Status Pembayaran</th>
+                                <th class="px-4 py-3">Status Konfirmasi</th>
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
@@ -47,9 +47,9 @@
 
                                     <td class="px-4 py-3 text-sm">
                                       @if ($item->status == 0)
-                                        Belum Lunas
+                                        Konfirmasi Sekarang
                                       @else
-                                        Lunas
+                                        Lain Kali
                                       @endif
                                   </td>
 
