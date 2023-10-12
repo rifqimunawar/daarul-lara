@@ -21,7 +21,7 @@
                       <a href="" class="dropdown-item">404 Page</a>
                   </div>
               </div> --}}
-              <a href="" class="nav-item nav-link">Contact</a>
+              <a href="/contact" class="nav-item nav-link {{ request()->is('/contact') ? 'active' : '' }}">Contact</a>
           </div>
           <a href="/biaya" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">Daftar Sekarang</a>
       </div>

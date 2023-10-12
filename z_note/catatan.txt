@@ -4,3 +4,5 @@ https://gist.github.com/leMaur/d2131aa3bddf9c8ccd220df0a5c15bce
 
 -> looping category courses di tab courses
 -> berhasil menambahkan data teacher by cource di form Pendaftaran
+-> berhasil menambahkan statistic di dashboard
+-> biodata teacher in root

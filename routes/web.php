@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/cources', [HomeController::class, 'cources'])->name('cources');
 Route::get('/cource/{id}/detail ', [HomeController::class, 'courcesDetail'])->name('cources');
+Route::get('/teacher/{id}/detail ', [HomeController::class, 'teachersDetail'])->name('teachers');
 Route::get('/category/{id}', [HomeController::class, 'categoryList'])->name('categoryList');
 
 Route::get('/biaya', [HomeController::class, 'biaya'])->name('biaya');

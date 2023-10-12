@@ -187,10 +187,8 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ asset('img/'.$item->img) }}" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end"
-                                    style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3"
-                                    style="border-radius: 0 30px 30px 0;">Join Now</a>
+                                <a href="/cource/{{ $item->id }}/detail " class="flex-shrink-0 btn btn-sm btn-primary px-3"
+                                    style="border-radius: 30px;">Selengkapnya....</a>
                             </div>
                         </div>
                         <div class="text-center p-4 pb-0">
@@ -210,7 +208,8 @@
                                     class="fa fa-user-tie text-primary me-2"></i>John Doe</small>
                             <small class="flex-fill text-center border-end py-2"><i
                                     class="fa fa-clock text-primary me-2"></i>1.49 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2">
+                              </i>{{ $item->students_count }}
                                 Students</small>
                         </div>
                     </div>
@@ -229,7 +228,8 @@
             </div>
             <div class="row g-4">
                 @foreach ($teacher as $item)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                      <a href="/teacher/{{ $item->id }}/detail">
                         <div class="team-item bg-light">
                             <div class="overflow-hidden">
                                 <img class="img-fluid" src="{{ asset('img/' . $item->img) }}" alt="">
@@ -249,6 +249,7 @@
                                 <small>{{ $item->cource->name }}</small>
                             </div>
                         </div>
+                      </a>
                     </div>
                 @endforeach
 

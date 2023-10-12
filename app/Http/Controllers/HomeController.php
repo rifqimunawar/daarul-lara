@@ -28,7 +28,7 @@ class HomeController extends Controller
         ->get();
 
       $teacher = Teacher::latest()->get();
-      $cource = Cource ::latest()->get();
+      $cource = Cource::latest()->withCount('students')->get();
 
       // dd($category_by_course);
         return view('root.home', compact('teacher', 'category_by_latest', 'category_by_course', 'cource'));
@@ -48,17 +48,14 @@ class HomeController extends Controller
     }
 
     public function cources() {
-
       $category = CategoryCource ::all();
-      $cource = Cource ::latest()->get();
+      $cource = Cource::latest()->withCount('students')->get();
+  
+      // dd($cource);
       return view('root.cources', compact('category', 'cource'));
     }
     public function categoryList($id, Request $request) {
-
       $category = CategoryCource :: with('cources')-> find($id);
-
-      // dd($category);
-
       return view('root.categoryList', compact('category'));
     }
 
@@ -67,6 +64,13 @@ class HomeController extends Controller
       
       $cource = Cource::find($id);
       return view('root.courcesDetail', compact('cource'));
+    }
+
+    public function teachersDetail($id, Request $request) {
+      
+      $teacher = Teacher::find($id);
+
+      return view('root.teacherDetail', compact('teacher'));
     }
 
 
