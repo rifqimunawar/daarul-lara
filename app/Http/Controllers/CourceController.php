@@ -109,7 +109,7 @@ class CourceController extends Controller
           $cource->img =  $newFileName;
         }
         
-        dd($cource);
+        // dd($cource);
         $cource->save();
         
         // dd($cource);
